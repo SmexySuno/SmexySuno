@@ -20,6 +20,7 @@ local system = Instance.new("Folder")
 
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.Name = "NebulaGui"
 
 __Hub__.Name = "__Hub__"
 __Hub__.Parent = ScreenGui
