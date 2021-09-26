@@ -1,0 +1,139 @@
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
+local ScreenGui = Instance.new("ScreenGui")
+local __Hub__ = Instance.new("Frame")
+local __Corner__ = Instance.new("UICorner")
+local __Top__ = Instance.new("Frame")
+local __Corner___2 = Instance.new("UICorner")
+local __Close__ = Instance.new("ImageButton")
+local __Title__ = Instance.new("TextLabel")
+local __Inside__ = Instance.new("Frame")
+local __Corner___3 = Instance.new("UICorner")
+local __Side__ = Instance.new("Frame")
+local __Corner___4 = Instance.new("UICorner")
+local system = Instance.new("Folder")
+
+--Properties:
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+__Hub__.Name = "__Hub__"
+__Hub__.Parent = ScreenGui
+__Hub__.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+__Hub__.Position = UDim2.new(0.359375, 0, 0.312328756, 0)
+__Hub__.Size = UDim2.new(0, 450, 0, 274)
+
+__Corner__.CornerRadius = UDim.new(0, 4)
+__Corner__.Name = "__Corner__"
+__Corner__.Parent = __Hub__
+
+__Top__.Name = "__Top__"
+__Top__.Parent = __Hub__
+__Top__.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+__Top__.Size = UDim2.new(0, 450, 0, 34)
+
+__Corner___2.CornerRadius = UDim.new(0, 4)
+__Corner___2.Name = "__Corner__"
+__Corner___2.Parent = __Top__
+
+__Close__.Name = "__Close__"
+__Close__.Parent = __Top__
+__Close__.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+__Close__.BackgroundTransparency = 1.000
+__Close__.Position = UDim2.new(0.940000057, 0, 0.264705896, 0)
+__Close__.Size = UDim2.new(0, 15, 0, 15)
+__Close__.Image = "http://www.roblox.com/asset/?id=7104731055"
+
+__Title__.Name = "__Title__"
+__Title__.Parent = __Top__
+__Title__.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+__Title__.BackgroundTransparency = 1.000
+__Title__.Position = UDim2.new(0.022999946, 0, 0, 0)
+__Title__.Size = UDim2.new(0, 398, 0, 34)
+__Title__.Font = Enum.Font.GothamSemibold
+__Title__.Text = "No game found"
+__Title__.TextColor3 = Color3.fromRGB(255, 255, 255)
+__Title__.TextSize = 14.000
+__Title__.TextXAlignment = Enum.TextXAlignment.Left
+
+__Inside__.Name = "__Inside__"
+__Inside__.Parent = __Hub__
+__Inside__.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+__Inside__.Position = UDim2.new(0.248888895, 0, 0.138686135, 0)
+__Inside__.Size = UDim2.new(0, 332, 0, 230)
+
+__Corner___3.CornerRadius = UDim.new(0, 4)
+__Corner___3.Name = "__Corner__"
+__Corner___3.Parent = __Inside__
+
+__Side__.Name = "__Side__"
+__Side__.Parent = __Hub__
+__Side__.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+__Side__.Position = UDim2.new(0.0133333337, 0, 0.138686135, 0)
+__Side__.Size = UDim2.new(0, 103, 0, 230)
+
+__Corner___4.CornerRadius = UDim.new(0, 4)
+__Corner___4.Name = "__Corner__"
+__Corner___4.Parent = __Side__
+
+system.Name = "system"
+system.Parent = __Hub__
+
+-- Scripts:
+
+local function TQJJ_fake_script() -- __Close__.close 
+	local script = Instance.new('LocalScript', __Close__)
+
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.Parent.Parent.Parent:Destroy()
+	end)
+end
+coroutine.wrap(TQJJ_fake_script)()
+local function CFZLCB_fake_script() -- system.drag 
+	local script = Instance.new('LocalScript', system)
+
+	local UserInputService = game:GetService("UserInputService")
+	
+	local gui = script.Parent.Parent
+	
+	local dragging
+	local dragInput
+	local dragStart
+	local startPos
+	
+	local function update(input)
+		local delta = input.Position - dragStart
+		gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	end
+	
+	gui.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = gui.Position
+			
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+	
+	gui.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			dragInput = input
+		end
+	end)
+	
+	UserInputService.InputChanged:Connect(function(input)
+		if input == dragInput and dragging then
+			update(input)
+		end
+	end)
+end
+coroutine.wrap(CFZLCB_fake_script)()
