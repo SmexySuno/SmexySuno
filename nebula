@@ -22,6 +22,10 @@ ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.Name = "NebulaGui"
 
+if game.PlaceId == 155615604 then
+	__Title__.Text = "Prison Life | v1.0.0"
+end
+
 __Hub__.Name = "__Hub__"
 __Hub__.Parent = ScreenGui
 __Hub__.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
